@@ -1,15 +1,13 @@
-const express = require('express');
-const router = express.Router();
 
-const { accounts } = require('../data');
+<%- include('header') %>
 
-router.get ('/savings', (req, res ) => { res.render('account', {account:  accounts.saving })
-});
+<%- include('transactions'), {account: account }); %>
 
-router.get ('/checking', (req, res ) => { res.render('account', {account:  accounts.checking })
-});
 
-router.get ('/credit', (req, res ) => { res.render('account', {account:  accounts.credit })
-});
+  <% if (account.unique_name == 'credit' && account.balance > 0) { %>
+    <br><a href="/services/payment">Make a Payment</a>
+  <% } %>
 
-module.exports = router;
+  <br><a href="/">Back to Accounts Summary</a>
+
+<%- include('footer') %>
